@@ -38,6 +38,9 @@ dependencies:
   firebase_auth: ^5.4.1
   get: ^4.6.6
   google_fonts: ^6.2.1
+  http:
+  url_launcher: ^6.2.5
+  webview_flutter: ^4.7.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +67,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
