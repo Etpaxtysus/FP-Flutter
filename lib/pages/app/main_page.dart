@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/controllers/news_controller.dart';
 import 'package:myapp/pages/app/get_started_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,9 +16,9 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    const NewsPage(), // Home
-    const SearchPage(), // Search
-    const SettingPage(), // Settings
+    const NewsPage(), // Home (Diperbarui)
+    const SearchPage(),
+    const SettingPage(),
   ];
 
   void onTabTapped(int index) {
@@ -28,42 +31,38 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 20,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Image.asset(
-                    'assets/images/menu_icon.png',
-                    fit: BoxFit.cover,
+        preferredSize: const Size.fromHeight(70), // Tidak diubah
+        child: SafeArea(
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 40,
+                    width: 40,
+                    child: Image.asset(
+                      'assets/icons/menu_icon.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                Text(
-                  'NewsApp',
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                  Text(
+                    'NewsApp',
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.notifications, color: Colors.black),
-                  onPressed: () {
-                    // Add notification logic here if needed
-                  },
-                ),
-              ],
+                  IconButton(
+                    icon: const Icon(Icons.notifications, color: Colors.black),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -98,12 +97,62 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'News Page',
-        style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
-      ),
-    );
+    final NewsController newsController = Get.put(NewsController());
+
+    return Obx(() {
+      if (newsController.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      if (newsController.newsList.isEmpty) {
+        return const Center(child: Text("No news available."));
+      }
+
+      return ListView.builder(
+        itemCount: newsController.newsList.length,
+        itemBuilder: (context, index) {
+          final news = newsController.newsList[index];
+
+          return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(10),
+              leading: Image.network(
+                news.imageUrl,
+                width: 80,
+                height: 80,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset('assets/images/placeholder.png',
+                      width: 80, height: 80, fit: BoxFit.cover);
+                },
+              ),
+              title: Text(
+                news.title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.poppins(
+                    fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                news.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.poppins(fontSize: 14),
+              ),
+              onTap: () async {
+                Uri url = Uri.parse(news.url);
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                } else {
+                  throw 'Could not launch ${news.url}';
+                }
+              },
+            ),
+          );
+        },
+      );
+    });
   }
 }
 
@@ -112,11 +161,8 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Search Page',
-        style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
-      ),
+    return const Center(
+      child: Text('Search Page'),
     );
   }
 }
