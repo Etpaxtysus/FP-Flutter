@@ -22,6 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Final Project',
       initialRoute: '/get-started',
+      theme: ThemeData.light(), // Tema terang
+      darkTheme: ThemeData.dark(), // Tema gelap
+      themeMode:
+          ThemeMode.system, // Menggunakan mode sistem (terang atau gelap)
       getPages: [
         GetPage(name: '/get-started', page: () => const GetStartedPage()),
         GetPage(name: '/login', page: () => const LoginPage()),
