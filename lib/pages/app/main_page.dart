@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/controllers/news_controller.dart';
 import 'package:myapp/pages/app/get_started_page.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:myapp/pages/app/news_page.dart'; // Mengimpor NewsPage yang baru
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,7 +15,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    const NewsPage(), // Home (Diperbarui)
+    const NewsPage(), // Sekarang mengacu ke NewsPage yang baru dipindah
     const SearchPage(),
     const SettingPage(),
   ];
@@ -67,7 +66,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
-      body: _children[_currentIndex],
+      body: _children[_currentIndex], // Menampilkan NewsPage dari file terpisah
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onTabTapped,
@@ -89,70 +88,6 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
     );
-  }
-}
-
-class NewsPage extends StatelessWidget {
-  const NewsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final NewsController newsController = Get.put(NewsController());
-
-    return Obx(() {
-      if (newsController.isLoading.value) {
-        return const Center(child: CircularProgressIndicator());
-      }
-
-      if (newsController.newsList.isEmpty) {
-        return const Center(child: Text("No news available."));
-      }
-
-      return ListView.builder(
-        itemCount: newsController.newsList.length,
-        itemBuilder: (context, index) {
-          final news = newsController.newsList[index];
-
-          return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(10),
-              leading: Image.network(
-                news.imageUrl,
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Image.asset('assets/images/placeholder.png',
-                      width: 80, height: 80, fit: BoxFit.cover);
-                },
-              ),
-              title: Text(
-                news.title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.poppins(
-                    fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                news.description,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.poppins(fontSize: 14),
-              ),
-              onTap: () async {
-                Uri url = Uri.parse(news.url);
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url, mode: LaunchMode.externalApplication);
-                } else {
-                  throw 'Could not launch ${news.url}';
-                }
-              },
-            ),
-          );
-        },
-      );
-    });
   }
 }
 
