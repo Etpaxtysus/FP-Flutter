@@ -13,13 +13,6 @@ class SearchPage extends StatelessWidget {
     TextEditingController searchController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Search News',
-          style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
