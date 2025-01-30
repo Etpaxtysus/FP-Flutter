@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/controllers/news_controller.dart';
-import 'news_detail_page.dart';
+import 'package:myapp/pages/app/news_detail_page.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key});
@@ -10,9 +10,18 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final NewsController newsController = Get.put(NewsController());
+    final ScrollController scrollController = ScrollController();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        print('Bottom of the list reached, loading more news');
+        newsController.fetchNews();
+      }
+    });
 
     return Obx(() {
-      if (newsController.isLoading.value) {
+      if (newsController.isLoading.value && newsController.newsList.isEmpty) {
         return const Center(child: CircularProgressIndicator());
       }
 
@@ -21,6 +30,7 @@ class NewsPage extends StatelessWidget {
       }
 
       return ListView.builder(
+        controller: scrollController,
         itemCount: newsController.newsList.length,
         itemBuilder: (context, index) {
           final news = newsController.newsList[index];
@@ -53,7 +63,8 @@ class NewsPage extends StatelessWidget {
                 style: GoogleFonts.poppins(fontSize: 14),
               ),
               onTap: () {
-                Get.to(() => const NewsDetailPage(), arguments: news);
+                Get.to(() => const NewsDetailPage(),
+                    arguments: news);
               },
             ),
           );
