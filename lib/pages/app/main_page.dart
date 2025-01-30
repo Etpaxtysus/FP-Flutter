@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/pages/app/get_started_page.dart';
 import 'package:myapp/pages/app/news_page.dart'; // Mengimpor NewsPage yang baru
+import 'package:myapp/pages/app/search_page.dart'; // Mengimpor SearchPage yang baru
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -14,9 +15,9 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    const NewsPage(), // Sekarang mengacu ke NewsPage yang baru dipindah
-    const SearchPage(),
-    const SettingPage(),
+    const NewsPage(), // Menampilkan NewsPage
+    const SearchPage(), // Menampilkan SearchPage
+    const SettingPage(), // Menampilkan SettingPage
   ];
 
   void onTabTapped(int index) {
@@ -65,10 +66,10 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
-      body: _children[_currentIndex], // Menampilkan NewsPage dari file terpisah
+      body: _children[_currentIndex], // Menampilkan halaman yang dipilih
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: onTabTapped,
+        onTap: onTabTapped,  // Navigasi berdasarkan tab yang dipilih
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         items: const [
@@ -78,7 +79,7 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',
+            label: 'Search',  // Menampilkan Search tab
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -90,16 +91,6 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Search Page'),
-    );
-  }
-}
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

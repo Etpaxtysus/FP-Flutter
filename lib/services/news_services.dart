@@ -7,12 +7,10 @@ class NewsService {
   static const String _baseUrl =
       'https://newsapi.org/v2/top-headlines?country=us&apiKey=$_apiKey';
 
-  // Memodifikasi fungsi fetchNews untuk mendukung limit dan page
   static Future<List<News>> fetchNews({int limit = 10, int page = 1}) async {
     try {
-      // Menambahkan parameter page dan pageSize ke URL
       final response = await http.get(Uri.parse(
-          '$_baseUrl&page=$page&pageSize=$limit')); // Menggunakan page dan limit
+          '$_baseUrl&page=$page&pageSize=$limit')); // Pagination: page dan limit
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
@@ -23,6 +21,24 @@ class NewsService {
       }
     } catch (e) {
       throw Exception('Error fetching news: $e');
+    }
+  }
+
+  // Fungsi untuk mencari berita berdasarkan keyword
+  static Future<List<News>> searchNews(String keyword) async {
+    try {
+      final response = await http.get(Uri.parse(
+          'https://newsapi.org/v2/everything?q=$keyword&apiKey=$_apiKey')); // Menggunakan endpoint 'everything' untuk pencarian
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        List<dynamic> articles = data['articles'];
+        return articles.map((json) => News.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to search news');
+      }
+    } catch (e) {
+      throw Exception('Error searching news: $e');
     }
   }
 }
