@@ -7,9 +7,12 @@ class NewsService {
   static const String _baseUrl =
       'https://newsapi.org/v2/top-headlines?country=us&apiKey=$_apiKey';
 
-  static Future<List<News>> fetchNews() async {
+  // Memodifikasi fungsi fetchNews untuk mendukung limit dan page
+  static Future<List<News>> fetchNews({int limit = 10, int page = 1}) async {
     try {
-      final response = await http.get(Uri.parse(_baseUrl));
+      // Menambahkan parameter page dan pageSize ke URL
+      final response = await http.get(Uri.parse(
+          '$_baseUrl&page=$page&pageSize=$limit')); // Menggunakan page dan limit
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
