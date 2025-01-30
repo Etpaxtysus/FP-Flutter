@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/pages/app/get_started_page.dart';
-import 'package:myapp/pages/app/news_page.dart'; // Mengimpor NewsPage yang baru
-import 'package:myapp/pages/app/search_page.dart'; // Mengimpor SearchPage yang baru
+import 'package:myapp/pages/app/news_page.dart';
+import 'package:myapp/pages/app/search_page.dart';
+import 'package:myapp/pages/app/setting_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,11 +13,12 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
+  bool isNotificationRead = false;
 
   final List<Widget> _children = [
     const NewsPage(), // Menampilkan NewsPage
     const SearchPage(), // Menampilkan SearchPage
-    const SettingPage(), // Menampilkan SettingPage
+    SettingPage(), // Menampilkan SettingPage
   ];
 
   void onTabTapped(int index) {
@@ -26,15 +27,28 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  void toggleNotification() {
+    setState(() {
+      isNotificationRead = !isNotificationRead;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Mendapatkan warna AppBar berdasarkan tema
+    final appBarColor = Theme.of(context).appBarTheme.backgroundColor;
+    // Menggunakan titleLarge atau bodyText1
+    final textColor =
+        Theme.of(context).textTheme.titleLarge?.color ?? Colors.black;
+    final iconColor = Theme.of(context).iconTheme.color ?? Colors.black;
+
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(70), // Tidak diubah
+        preferredSize: const Size.fromHeight(70),
         child: SafeArea(
           child: AppBar(
             elevation: 0,
-            backgroundColor: Colors.white,
+            backgroundColor: appBarColor, // Sesuaikan dengan warna tema
             flexibleSpace: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
@@ -53,12 +67,19 @@ class _MainPageState extends State<MainPage> {
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color:
+                          textColor, // Menggunakan warna teks berdasarkan tema
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.notifications, color: Colors.black),
-                    onPressed: () {},
+                    icon: Icon(
+                      isNotificationRead
+                          ? Icons.notifications_off
+                          : Icons.notifications,
+                      color:
+                          iconColor, // Menggunakan warna ikon berdasarkan tema
+                    ),
+                    onPressed: toggleNotification,
                   ),
                 ],
               ),
@@ -69,7 +90,7 @@ class _MainPageState extends State<MainPage> {
       body: _children[_currentIndex], // Menampilkan halaman yang dipilih
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: onTabTapped,  // Navigasi berdasarkan tab yang dipilih
+        onTap: onTabTapped,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         items: const [
@@ -79,45 +100,13 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',  // Menampilkan Search tab
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
         ],
-      ),
-    );
-  }
-}
-
-
-class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const GetStartedPage(),
-            ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        child: const Text(
-          'Logout',
-          style: TextStyle(fontSize: 16, color: Colors.white),
-        ),
       ),
     );
   }
