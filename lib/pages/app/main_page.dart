@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/pages/app/get_started_page.dart';
 import 'package:myapp/pages/app/news_page.dart'; // Mengimpor NewsPage yang baru
