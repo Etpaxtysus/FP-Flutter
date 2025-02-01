@@ -93,37 +93,29 @@ Aplikasi ini memberikan pengalaman pengguna yang mudah untuk menjelajahi dan men
 
 ## Screenshots
 
-### Get Started and Login Pages
+### Get Started, Login, and Register Pages
 
 <div style="display: flex; justify-content: space-between;">
   <img src="assets/screenshots/GetStarted.png" width="200" height="400" />
   <img src="assets/screenshots/Login.png" width="200" height="400" />
-</div>
-
-### Register and News Pages
-
-<div style="display: flex; justify-content: space-between;">
   <img src="assets/screenshots/Register.png" width="200" height="400" />
-  <img src="assets/screenshots/News.png" width="200" height="400" />
 </div>
 
-### Search and Settings Pages
+###  News, Search, and Settings Pages
 
 <div style="display: flex; justify-content: space-between;">
+  <img src="assets/screenshots/News.png" width="200" height="400" />
   <img src="assets/screenshots/Search.png" width="200" height="400" />
   <img src="assets/screenshots/Settings.png" width="200" height="400" />
 </div>
 
 ## Dark Mode
 
-### News Page 
+### News, Search, and Settings Pages
 
-<img src="assets/screenshots/News-Dark.png" width="200" height="400" />
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets/screenshots/News-Dark.png" width="200" height="400" />
+  <img src="assets/screenshots/Search-Dark.png" width="200" height="400" />
+  <img src="assets/screenshots/Settings-Dark.png" width="200" height="400" />
+</div>
 
-### Search Page
-
-<img src="assets/screenshots/Search-Dark.png" width="200" height="400" />
-
-### Settings Page 
-
-<img src="assets/screenshots/Settings-Dark.png" width="200" height="400" />
