@@ -1,16 +1,45 @@
-# myapp
+# Final Project Flutter
 
-A new Flutter project.
+A Flutter project by Rhenaldy Chandra.
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### Get Started Page
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img src="assets/screenshots/GetStarted.png" width="200" height="400" />
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Login Page
+
+<img src="assets/screenshots/Login.png" width="200" height="400" />
+
+### Register Page
+
+<img src="assets/screenshots/Register.png" width="200" height="400" />
+
+### News Page 
+
+<img src="assets/screenshots/News.png" width="200" height="400" />
+
+### Search Page
+
+<img src="assets/screenshots/Search.png" width="200" height="400" />
+
+### Settings Page
+
+<img src="assets/screenshots/Settings.png" width="200" height="400" />
+
+## Dark Mode
+
+### News Page 
+
+<img src="assets/screenshots/News-Dark.png" width="200" height="400" />
+
+### Search Page
+
+<img src="assets/screenshots/Search-Dark.png" width="200" height="400" />
+
+### Settings Page 
+
+<img src="assets/screenshots/Settings-Dark.png" width="200" height="400" />
