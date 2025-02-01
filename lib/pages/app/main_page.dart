@@ -16,9 +16,9 @@ class _MainPageState extends State<MainPage> {
   bool isNotificationRead = false;
 
   final List<Widget> _children = [
-    const NewsPage(), // Menampilkan NewsPage
-    const SearchPage(), // Menampilkan SearchPage
-    SettingPage(), // Menampilkan SettingPage
+    const NewsPage(),
+    const SearchPage(),
+    SettingPage(), 
   ];
 
   void onTabTapped(int index) {
@@ -35,9 +35,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Mendapatkan warna AppBar berdasarkan tema
+  
     final appBarColor = Theme.of(context).appBarTheme.backgroundColor;
-    // Menggunakan titleLarge atau bodyText1
     final textColor =
         Theme.of(context).textTheme.titleLarge?.color ?? Colors.black;
     final iconColor = Theme.of(context).iconTheme.color ?? Colors.black;
@@ -48,7 +47,7 @@ class _MainPageState extends State<MainPage> {
         child: SafeArea(
           child: AppBar(
             elevation: 0,
-            backgroundColor: appBarColor, // Sesuaikan dengan warna tema
+            backgroundColor: appBarColor,
             flexibleSpace: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Row(
@@ -68,7 +67,7 @@ class _MainPageState extends State<MainPage> {
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color:
-                          textColor, // Menggunakan warna teks berdasarkan tema
+                          textColor, 
                     ),
                   ),
                   IconButton(
@@ -77,7 +76,7 @@ class _MainPageState extends State<MainPage> {
                           ? Icons.notifications_off
                           : Icons.notifications,
                       color:
-                          iconColor, // Menggunakan warna ikon berdasarkan tema
+                          iconColor,
                     ),
                     onPressed: toggleNotification,
                   ),
@@ -87,7 +86,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
-      body: _children[_currentIndex], // Menampilkan halaman yang dipilih
+      body: _children[_currentIndex], 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onTabTapped,

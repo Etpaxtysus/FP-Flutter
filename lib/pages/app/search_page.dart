@@ -17,7 +17,7 @@ class SearchPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // TextField untuk pencarian
+            
             TextField(
               controller: searchController,
               decoration: InputDecoration(
@@ -26,18 +26,17 @@ class SearchPage extends StatelessWidget {
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () {
-                    // Memanggil fungsi pencarian ketika tombol search ditekan
                     newsController.searchNews(searchController.text);
                   },
                 ),
               ),
               onSubmitted: (value) {
                 newsController
-                    .searchNews(value); // Pencarian otomatis saat Enter
+                    .searchNews(value);
               },
             ),
             const SizedBox(height: 20),
-            // Menampilkan hasil pencarian
+            
             Obx(() {
               if (newsController.isLoading.value) {
                 return const Center(child: CircularProgressIndicator());
@@ -82,7 +81,6 @@ class SearchPage extends StatelessWidget {
                           style: GoogleFonts.poppins(fontSize: 14),
                         ),
                         onTap: () {
-                          // Navigasi ke halaman detail berita
                           Get.to(() => const NewsDetailPage(), arguments: news);
                         },
                       ),

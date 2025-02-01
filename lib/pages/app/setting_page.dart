@@ -6,13 +6,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({super.key});
-
-  // Buat RxBool untuk melacak status dark mode
   final RxBool isDarkMode = RxBool(Get.isDarkMode);
 
   @override
   Widget build(BuildContext context) {
-    // Mendapatkan email pengguna yang sedang login
     final User? user = FirebaseAuth.instance.currentUser;
 
     return Padding(
@@ -39,17 +36,14 @@ class SettingPage extends StatelessWidget {
                 : Text('Not Logged In'),
             onTap: () {},
           ),
-
-          // Theme Settings (Light/Dark Mode)
           Obx(() {
             return ListTile(
               leading: Icon(Icons.dark_mode, color: Colors.blue),
               title: Text('Dark Mode'),
               trailing: Switch(
                 value: isDarkMode
-                    .value, // Gunakan RxBool untuk menentukan status switch
+                    .value, 
                 onChanged: (bool value) {
-                  // Ubah tema dan status RxBool
                   isDarkMode.value = value;
                   Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
                 },

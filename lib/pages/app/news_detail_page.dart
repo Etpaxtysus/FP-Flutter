@@ -8,7 +8,7 @@ class NewsDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mengambil data berita yang dikirimkan melalui Get.arguments
+    
     final News news = Get.arguments;
 
     return Scaffold(

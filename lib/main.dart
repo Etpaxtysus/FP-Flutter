@@ -9,7 +9,7 @@ import 'package:myapp/pages/auth/register_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Inisialisasi Firebase
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Final Project',
       initialRoute: '/get-started',
-      theme: ThemeData.light(), // Tema terang
-      darkTheme: ThemeData.dark(), // Tema gelap
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       themeMode:
-          ThemeMode.system, // Menggunakan mode sistem (terang atau gelap)
+          ThemeMode.system,
       getPages: [
         GetPage(name: '/get-started', page: () => const GetStartedPage()),
         GetPage(name: '/login', page: () => const LoginPage()),
