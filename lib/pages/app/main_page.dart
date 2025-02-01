@@ -18,7 +18,7 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> _children = [
     const NewsPage(),
     const SearchPage(),
-    SettingPage(), 
+    SettingPage(),
   ];
 
   void onTabTapped(int index) {
@@ -35,7 +35,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-  
     final appBarColor = Theme.of(context).appBarTheme.backgroundColor;
     final textColor =
         Theme.of(context).textTheme.titleLarge?.color ?? Colors.black;
@@ -54,11 +53,13 @@ class _MainPageState extends State<MainPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: Image.asset(
-                      'assets/icons/menu_icon.png',
-                      fit: BoxFit.cover,
+                    height: 50,
+                    width: 50,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/icons/logo.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Text(
@@ -66,8 +67,7 @@ class _MainPageState extends State<MainPage> {
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color:
-                          textColor, 
+                      color: textColor,
                     ),
                   ),
                   IconButton(
@@ -75,8 +75,7 @@ class _MainPageState extends State<MainPage> {
                       isNotificationRead
                           ? Icons.notifications_off
                           : Icons.notifications,
-                      color:
-                          iconColor,
+                      color: iconColor,
                     ),
                     onPressed: toggleNotification,
                   ),
@@ -86,7 +85,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
-      body: _children[_currentIndex], 
+      body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onTabTapped,
