@@ -1,5 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permisson android:name="android.permission.INTERNET"/>
     <application
         android:label="Final Project Flutter"
         android:name="${applicationName}"
