@@ -35,13 +35,27 @@ class LoginPage extends StatelessWidget {
           child: ListView(
             children: [
               Center(
-                  child: Container(
-                width: 352,
-                height: 330,
-                decoration: BoxDecoration(
+                child: Container(
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/deal.png'))),
-              )),
+                      image: AssetImage('assets/icons/logo.png'),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  'Selamat Datang Kembali',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff3498DB),
+                  ),
+                ),
+              ),
               SizedBox(height: 40),
               CustomTextFormField(
                 label: 'Email',
@@ -132,7 +146,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10), // Kurangi padding agar cocok
+      padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
         controller: widget.controller,
         obscureText: _isObscured,

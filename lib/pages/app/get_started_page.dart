@@ -14,6 +14,12 @@ class GetStartedPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/icons/logo.png',
+                height: 150,
+                width: 150,
+              ),
+              SizedBox(height: 25),
               Text(
                 'Final Project',
                 style: TextStyle(

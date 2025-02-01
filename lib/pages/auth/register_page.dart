@@ -45,16 +45,38 @@ class RegisterPage extends StatelessWidget {
           child: ListView(
             children: [
               Center(
-                  child: Container(
-                width: 352,
-                height: 330,
-                decoration: BoxDecoration(
+                child: Container(
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/image_news_app.png'))),
-              )),
-              SizedBox(
-                height: 40,
+                      image: AssetImage('assets/icons/logo.png'),
+                    ),
+                  ),
+                ),
               ),
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  'Selamat Datang',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff3498DB),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Center(
+                child: Text(
+                  'Silahkan Mendaftar',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0xff3498DB),
+                  ),
+                ),
+              ),
+              SizedBox(height: 40),
               CustomTextFormField(
                 label: 'Email',
                 controller: emailController,
