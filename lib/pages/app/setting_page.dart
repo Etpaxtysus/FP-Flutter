@@ -17,7 +17,6 @@ class SettingPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
           Text(
             'Settings',
             style: GoogleFonts.poppins(
@@ -27,7 +26,6 @@ class SettingPage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // Profile Settings
           ListTile(
             leading: Icon(Icons.account_circle, color: Colors.blue),
             title: Text('Profile'),
@@ -53,7 +51,6 @@ class SettingPage extends StatelessWidget {
 
           const Divider(),
 
-          // Logout Option
           ListTile(
             leading: Icon(Icons.logout, color: Colors.red),
             title: Text('Logout'),

@@ -10,7 +10,7 @@ class NewsService {
   static Future<List<News>> fetchNews({int limit = 10, int page = 1}) async {
     try {
       final response = await http.get(Uri.parse(
-          '$_baseUrl&page=$page&pageSize=$limit')); // Pagination: page dan limit
+          '$_baseUrl&page=$page&pageSize=$limit'));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
@@ -24,11 +24,10 @@ class NewsService {
     }
   }
 
-  // Fungsi untuk mencari berita berdasarkan keyword
   static Future<List<News>> searchNews(String keyword) async {
     try {
       final response = await http.get(Uri.parse(
-          'https://newsapi.org/v2/everything?q=$keyword&apiKey=$_apiKey')); // Menggunakan endpoint 'everything' untuk pencarian
+          'https://newsapi.org/v2/everything?q=$keyword&apiKey=$_apiKey'));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);

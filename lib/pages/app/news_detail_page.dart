@@ -24,7 +24,6 @@ class NewsDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Gambar Berita
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
@@ -44,7 +43,6 @@ class NewsDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            // Judul Berita
             Text(
               news.title,
               style: GoogleFonts.poppins(
@@ -52,7 +50,6 @@ class NewsDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            // Deskripsi Berita
             Text(
               news.description,
               style: GoogleFonts.poppins(fontSize: 16),
